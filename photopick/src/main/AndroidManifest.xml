@@ -16,6 +16,7 @@
         <activity android:name=".ImagePickActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard|"
+            android:theme="@style/themeTranslant"
             ></activity>
         <provider
             android:name="android.support.v4.content.FileProvider"

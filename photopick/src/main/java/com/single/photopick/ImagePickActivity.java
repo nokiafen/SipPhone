@@ -13,6 +13,8 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 import java.io.File;
 
@@ -37,6 +39,11 @@ public class ImagePickActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window window=getWindow();
+        WindowManager.LayoutParams wl = window.getAttributes();
+        wl.flags=WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+        wl.alpha=0.0f;
+        window.setAttributes(wl);
         setContentView(R.layout.image_pick_layout);
         instance = this;
         tempDir = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "TempCahe";
