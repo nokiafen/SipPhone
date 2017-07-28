@@ -47,7 +47,7 @@ public class SetPhotoDialog extends Dialog implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        ImagePickActivity.imageFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/filename.jpg";
+
         File temp = new File(ImagePickActivity.imageFilePath);  //创建文件指定选择/拍照  的文件存储位置
         int id = view.getId();
         if (id == R.id.id_set_photo_dailog_take_picture) {
@@ -55,16 +55,16 @@ public class SetPhotoDialog extends Dialog implements View.OnClickListener{
 //            Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                it.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 //             ImagePickActivity.instance.startActivityForResult(it, ImagePickActivity.SELECT_BY_CAMERA);
-            ImagePickActivity.instance.openCamera();
+            act.openCamera();
         } else if (id == R.id.id_set_photo_dailog_select_picture) {
             Intent picture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             picture.putExtra(
                     MediaStore.EXTRA_OUTPUT,  //指定返回方式  非常重要 否则 图片过大内存 会有挂掉的风险
                     Uri.fromFile(temp));
-            ImagePickActivity.instance.startActivityForResult(picture, ImagePickActivity.SELECT_BY_PICTURE_LIST);
+            act.startActivityForResult(picture, ImagePickActivity.SELECT_BY_PICTURE_LIST);
         } else if (id == R.id.id_set_photo_dailog_cancel) {
             hide();
-            ImagePickActivity.instance.finish();
+            act.finish();
         }
     }
 

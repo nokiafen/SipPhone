@@ -16,12 +16,12 @@ import java.io.File;
 
 public class UploadUtil {
 
-    public  static Bitmap getTargetBitmap(String path){
+    public  static Bitmap getTargetBitmap(String path,int with,int height){
         BitmapFactory.Options opts = new BitmapFactory.Options();
                 BitmapFactory
                 .decodeFile(path);
 
-        opts.inSampleSize = getTargetScaleSize(opts, 800, 800);
+        opts.inSampleSize = getTargetScaleSize(opts, with, height);
         opts.inJustDecodeBounds = false;
         Bitmap     iBitmap1 = BitmapFactory
                 .decodeFile(
