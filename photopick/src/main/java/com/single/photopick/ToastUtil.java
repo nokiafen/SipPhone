@@ -1,5 +1,6 @@
 package com.single.photopick;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.widget.Toast;
@@ -79,7 +80,7 @@ public class ToastUtil {
 	 */
 	private static void showToast(Context context, String text, int duration) {
 		if (text != null && !text.equals(showingText)) {
-			toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+			toast = Toast.makeText(context.getApplicationContext(), text, Toast.LENGTH_SHORT);
 			toast.show();
 			showingText = text;
 			// 启动计时器，当toast消失后，将showingText置为null

@@ -86,7 +86,7 @@ public class ImagePickActivity extends AppCompatActivity {
                 e.printStackTrace();
                 this.finish();
             }
-        } else if (requestCode == SELECT_BY_CAMERA) {
+        } else if (requestCode == SELECT_BY_CAMERA&&resultCode == Activity.RESULT_OK) {
             toZoomPic();
         } else if (requestCode == CUT_IMAGE && resultCode == Activity.RESULT_OK) {
             File file = new File(tempFile);
