@@ -2,12 +2,14 @@ package com.single.photopick;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -80,6 +82,7 @@ public class SetPhotoDialog extends Dialog implements View.OnClickListener{
         getWindow().getDecorView().setPadding(0, 0, 0, 0);
         getWindow().setAttributes(layoutParams);
         getWindow().setWindowAnimations(R.style.DailDialogAnimation);
+
     }
 
     private void m_InitView(){
@@ -95,5 +98,21 @@ public class SetPhotoDialog extends Dialog implements View.OnClickListener{
             mSelectPictureBtn.setOnClickListener(this);
             mCancelBtn.setOnClickListener(this);
         }
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event)
+    {
+
+        switch(event.getKeyCode())
+        {
+            case KeyEvent.KEYCODE_BACK:
+               this.hide();
+                act.finish();
+                break;
+            default:
+                break;
+        }
+        return super.dispatchKeyEvent(event);
     }
 }
