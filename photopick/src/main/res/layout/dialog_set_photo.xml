@@ -2,15 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     android:orientation="vertical">
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:background="@color/white"
+        android:background="?android:attr/selectableItemBackground"
         android:text="@string/take_picture"
-        android:textColor="@color/actionsheet_blue"
+        android:textColor="@color/dialog_text_color"
         android:textSize="16sp"
         android:gravity="center"
         android:id="@+id/id_set_photo_dailog_take_picture"
@@ -23,20 +29,28 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:background="@color/white"
+        android:background="?android:attr/selectableItemBackground"
         android:text="@string/select_picture"
-        android:textColor="@color/actionsheet_blue"
+        android:textColor="@color/dialog_text_color"
         android:textSize="16sp"
         android:gravity="center"
         android:id="@+id/id_set_photo_dailog_select_picture"/>
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:background="@color/white"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/actionsheet_blue"
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="@color/dialog_text_color"
         android:textSize="16sp"
         android:text="@string/cancel"
         android:gravity="center"
         android:id="@+id/id_set_photo_dailog_cancel"/>
+    </LinearLayout>
 </LinearLayout>
