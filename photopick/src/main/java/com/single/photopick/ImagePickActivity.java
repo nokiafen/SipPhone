@@ -1,6 +1,8 @@
 package com.single.photopick;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -114,7 +116,7 @@ public class ImagePickActivity extends AppCompatActivity {
                 file.mkdirs();
             file = new File(
                     tempFile);
-            Uri uricrop = Uri.fromFile(file);
+            Uri uricrop = getImageContentUri(this,file);
             Intent intent = new Intent("com.android.camera.action.CROP");
             intent.setDataAndType(fileUri, "image/*");
             intent.putExtra("crop", "true");
@@ -147,7 +149,7 @@ public class ImagePickActivity extends AppCompatActivity {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         } else {
             //兼容android7.0 使用共享文件的形式
-            uri = FileProvider.getUriForFile(this,"photopickshare.provider", tempFile);//通过FileProvider创建一个content类型的Uri
+            uri = FileProvider.getUriForFile(this,"photopicktalk.provider", tempFile);//通过FileProvider创建一个content类型的Uri
             intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
             List<ResolveInfo> resInfoList = getPackageManager().queryIntentActivities
                     (intent, PackageManager.MATCH_DEFAULT_ONLY);
@@ -173,9 +175,9 @@ public class ImagePickActivity extends AppCompatActivity {
                 file.mkdirs();
             file = new File(
                     tempFile);
-            Uri uricrop = Uri.fromFile(file);
+            Uri uricrop = getImageContentUri(this,file);
             Intent intent = new Intent("com.android.camera.action.CROP");
-            intent.setDataAndType(uri, "image/*");
+            intent.setDataAndType(uricrop, "image/*");
             intent.putExtra("crop", "true");
             intent.putExtra("aspectX", 1);
             intent.putExtra("aspectY", 1);
@@ -198,6 +200,31 @@ public class ImagePickActivity extends AppCompatActivity {
     if(mSetPhotoDialog!=null){
         mSetPhotoDialog.dismiss();
     }
+    }
+
+    public static Uri getImageContentUri(Context context, File imageFile) {
+        String filePath = imageFile.getAbsolutePath();
+        Cursor cursor = context.getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                new String[] { MediaStore.Images.Media._ID },
+                MediaStore.Images.Media.DATA + "=? ",
+                new String[] { filePath }, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor
+                    .getColumnIndex(MediaStore.MediaColumns._ID));
+            Uri baseUri = Uri.parse("content://media/external/images/media");
+            return Uri.withAppendedPath(baseUri, "" + id);
+        } else {
+            if (imageFile.exists()) {
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DATA, filePath);
+                return context.getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            } else {
+                return null;
+            }
+        }
     }
 
 

@@ -1,4 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.single.photopick">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.single.photopick"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <!-- 拨打电话的权限 -->
@@ -10,6 +12,7 @@
     <!--保存资源到SD卡-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application android:allowBackup="true"
+        tools:overrideLibrary="com.single.photopick"
         android:supportsRtl="true"
         >
         <activity android:name=".ImagePickActivity"
@@ -19,7 +22,7 @@
             ></activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="photopickshare.provider"
+            android:authorities="photopicktalk.provider"
             android:exported="false"
             android:grantUriPermissions="true"
             >
